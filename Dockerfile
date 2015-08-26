@@ -1,11 +1,8 @@
-FROM mazzolino/armhf-ubuntu:14.04
+FROM ubuntu:14.04
+#FROM mazzolino/armhf-ubuntu:14.04
 MAINTAINER Daniel Chalef <daniel.chalef@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-#ENV JASPER_HOME /opt/jasper
-#RUN export JASPER_HOME=$JASPER_HOME
-
-#COPY compile-sirius-servers.sh.patch /tmp/
 
 RUN update-locale LANG=C LANGUAGE=C LC_ALL=C LC_MESSAGES=POSIX
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu trusty main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -22,13 +19,10 @@ RUN apt-get update; apt-get upgrade -y
 RUN apt-get install -y wget
 RUN wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
 
-RUN apt-get update
-
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
 	ros-jade-ros-base python-rosdep python-rosinstall
 
 RUN rosdep init; rosdep update
 
-RUN echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
-
+RUN echo "source /opt/ros/jade/setup.bash" >> ~/.bashrc
 
