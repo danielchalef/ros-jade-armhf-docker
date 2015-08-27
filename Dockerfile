@@ -12,7 +12,7 @@ RUN touch /etc/init.d/systemd-logind
 
 RUN apt-get update; apt-get upgrade -y
 
-RUN apt-get install -y wget
+RUN apt-get install -y wget aptbuild
 RUN wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
 
 RUN apt-get update && apt-get install -y \
@@ -22,3 +22,5 @@ RUN rosdep init; rosdep update
 
 RUN echo "source /opt/ros/jade/setup.bash" >> ~/.bashrc
 
+# Create catkin workspace
+RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && catkin_init_workspace
