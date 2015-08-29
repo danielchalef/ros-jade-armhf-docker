@@ -5,3 +5,4 @@ Docker image for ROS Jade armhf
 * Docker, git, bridge-utils
 
 `apt-get install docker.io git bridge-utils`
+* Pipework https://github.com/jpetazzo/pipework
